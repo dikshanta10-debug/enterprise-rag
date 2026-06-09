@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+python-multipart
+psycopg2-binary
+pgvector
+sentence-transformers
+langchain
+langchain-text-splitters
+PyPDF2
+python-dotenv
