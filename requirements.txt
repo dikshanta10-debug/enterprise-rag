@@ -6,5 +6,6 @@ pgvector
 sentence-transformers
 langchain
 langchain-text-splitters
-PyPDF2
+pdfplumber
 python-dotenv
+ollama

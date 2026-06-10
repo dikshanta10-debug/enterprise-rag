@@ -7,7 +7,7 @@ def retrieve_chunks(query_embedding: list[float], top_k: int = 5, threshold: flo
         cur.execute("CREATE EXTENSION IF NOT EXISTS vector;")
     register_vector(conn)
 
-    # Convert the Python list to a PostgreSQL vector literal string, e.g., '[0.12, -0.34, ...]'
+    # Convert the Python list to a PostgreSQL vector literal string
     vector_str = "[" + ",".join(str(x) for x in query_embedding) + "]"
 
     with conn.cursor() as cur:
@@ -20,5 +20,10 @@ def retrieve_chunks(query_embedding: list[float], top_k: int = 5, threshold: flo
         rows = cur.fetchall()
     conn.close()
 
+    chunks_retrieved = len(rows)
+
+    # Apply relevance guardrail
     relevant = [(row["chunk_text"], row["similarity"]) for row in rows if row["similarity"] >= threshold]
-    return relevant
+    chunks_after_filter = len(relevant)
+
+    return relevant, chunks_retrieved, chunks_after_filter

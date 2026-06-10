@@ -11,3 +11,6 @@ class QueryRequest(BaseModel):
 class QueryResponse(BaseModel):
     answer: str
     sources_count: int
+    chunks_retrieved: int
+    chunks_after_filter: int
+    retrieval_latency_ms: float
