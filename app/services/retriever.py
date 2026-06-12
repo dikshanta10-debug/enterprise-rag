@@ -1,7 +1,7 @@
 from app.database import get_connection
 from pgvector.psycopg2 import register_vector
 
-def retrieve_chunks(query_embedding: list[float], top_k: int = 5, threshold: float = 0.3):
+def retrieve_chunks(query_embedding: list[float], top_k: int = 10, threshold: float = 0.5):
     conn = get_connection()
     with conn.cursor() as cur:
         cur.execute("CREATE EXTENSION IF NOT EXISTS vector;")
